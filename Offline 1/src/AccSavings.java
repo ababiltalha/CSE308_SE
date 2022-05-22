@@ -60,7 +60,7 @@ public class AccSavings extends Account {
                 setLoanApproval(0);
             }
             else {
-                setLoanRequest();
+                setLoanRequest(amount);
                 System.out.println("Loan request successful, sent for approval.");
             }
         }

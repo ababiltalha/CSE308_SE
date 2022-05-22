@@ -1,8 +1,10 @@
 public abstract class Account {
     private String name;
     private String type;
+    private int accountAge;
     private double currentBalance;
     private double loanAmount;
+    private double requestedAmount;
     private boolean loanRequest, loanApproval;
     private static double loanInterestRate= 0.10;
     private static final double serviceCharge= 500;
@@ -12,6 +14,7 @@ public abstract class Account {
         this.type= type;
         this.currentBalance= currentBalance;
         this.loanAmount= loanAmount;
+        this.requestedAmount= this.accountAge= 0;
         this.loanApproval= this.loanRequest= false;
         System.out.println((type)+" account for "+name+" created; initial balance "+currentBalance+"$.");
     }
@@ -57,8 +60,13 @@ public abstract class Account {
         return loanApproval;
     }
 
-    public void setLoanRequest() {
+    public void setLoanRequest(double amount) {
+        this.requestedAmount= amount;
         this.loanRequest = true;
+    }
+
+    public boolean isLoanRequest(){
+        return loanRequest;
     }
 
     public void setLoanApproval(double amount) {
@@ -77,6 +85,19 @@ public abstract class Account {
     }
 
     public void queryDeposit(){
-        System.out.println("Current Balance "+currentBalance+"$, loan "+loanAmount+"$");
+        System.out.println("Current Balance "+currentBalance+"$, ");
+        if(loanAmount!=0)   System.out.print("loan "+loanAmount+"$");
+    }
+
+    public double getRequestedAmount() {
+        return requestedAmount;
+    }
+
+    public void incrementClock() {
+        accountAge++;
+    }
+
+    public int getAccountAge() {
+        return accountAge;
     }
 }

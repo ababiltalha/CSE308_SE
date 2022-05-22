@@ -14,12 +14,13 @@ public abstract class Employee {
         this.lookUpPrivilege = lookUpPrivilege;
     }
 
-    public void lookUpAccount(Account account){
+    public boolean lookUpAccount(Account account){
         if(!lookUpPrivilege){
             System.out.println("You don't have permission for this operation.");
-            return;
+            return false;
         }
         System.out.println(account.getName()+"'s current balance"+account.getCurrentBalance()+"$");
+        return true;
     }
 
     public void seeFund(){
@@ -45,7 +46,7 @@ public abstract class Employee {
         }
         if(type.equalsIgnoreCase("savings")) AccSavings.updateRate(newRate);
         if(type.equalsIgnoreCase("student")) AccStudent.updateRate(newRate);
-        if(type.equalsIgnoreCase("loan")) AccLoan.updateRate(newRate);
+        if(type.equalsIgnoreCase("loan")) AccLoan.updateRate();
         if(type.equalsIgnoreCase("fixed")) AccFixed.updateRate(newRate);
     }
 }

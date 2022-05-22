@@ -34,7 +34,13 @@ public class Bank {
     }
 
     public void incrementClock(){
-
+        //maturity true
+        clock++;
+        for (Account a:
+             accountList) {
+            internalFund-=a.updateBalance();
+            a.incrementClock();
+        }
     }
     private boolean checkForName(String newName)
     {
@@ -117,5 +123,105 @@ public class Bank {
     public void closeUser(){
         deactivate();
     }
+
+    private boolean checkAccLogIn(){
+        return activeAcc != null;
+    }
+
+    private boolean checkEmpLogIn(){
+        return activeEmp != null;
+    }
+
+
+    public void deposit(double amount){
+        if(!checkAccLogIn()){
+            System.out.println("Log in a deposit account.");
+            return;
+        }
+        double prevBalance=activeAcc.getCurrentBalance();
+        activeAcc.deposit(amount);
+        if(activeAcc.getCurrentBalance()!=prevBalance)
+            System.out.println(amount+"$ deposited. Current balance "+activeAcc.getCurrentBalance()+"$");
+        else
+            System.out.println("Invalid transaction. Current balance "+activeAcc.getCurrentBalance()+"$");
+    }
+
+    public void withdraw(double amount){
+        if(!checkAccLogIn()){
+            System.out.println("Log in a deposit account.");
+            return;
+        }
+        if(!validateAmount(amount)) return;
+        double prevBalance=activeAcc.getCurrentBalance();
+        activeAcc.withdraw(amount);
+        if(activeAcc.getCurrentBalance()!=prevBalance)
+            System.out.println(amount+"$ withdrawn. Current balance "+activeAcc.getCurrentBalance()+"$");
+        else
+            System.out.println("Invalid transaction. Current balance "+activeAcc.getCurrentBalance()+"$");
+    }
+
+    public void query(){
+        if(!checkAccLogIn()){
+            System.out.println("Log in a deposit account.");
+            return;
+        }
+        activeAcc.queryDeposit();
+    }
+
+    public void request(double amount){
+        if(!checkAccLogIn()){
+            System.out.println("Log in a deposit account.");
+            return;
+        }
+        if(!validateAmount(amount)) return;
+        activeAcc.requestLoan(amount);
+    }
+
+    public void approve(){
+        if(!checkEmpLogIn()){
+            System.out.println("Access denied. Log in as an employee.");
+            return;
+        }
+        for (Account a:
+             accountList) {
+            if(a.isLoanRequest()){
+                activeEmp.approveLoan(a, a.getRequestedAmount());
+                System.out.println("Loan for "+a.getName()+" approved.");
+            }
+        }
+    }
+
+    public void change(String type, double newRate){
+        if(!checkEmpLogIn()){
+            System.out.println("Access denied. Log in as an employee.");
+            return;
+        }
+        activeEmp.changeInterestRate(type,newRate);
+    }
+
+    public void lookup(String name){
+        boolean flag=false;
+        if(!checkEmpLogIn()){
+            System.out.println("Access denied. Log in as an employee.");
+            return;
+        }
+        for (Account a:
+                accountList) {
+            if(a.getName().equals(name)){
+                flag= activeEmp.lookUpAccount(a);
+                break;
+            }
+        }
+        if(!flag) System.out.println("Account not found");
+    }
+
+    public void see(){
+        if(!checkEmpLogIn()){
+            System.out.println("Access denied. Log in as an employee.");
+            return;
+        }
+        activeEmp.seeFund();
+    }
+
 
 }

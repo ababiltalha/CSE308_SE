@@ -13,6 +13,7 @@ public class AccFixed extends Account{
         double netChange=(balance*interestRate)-(getLoanAmount()*getLoanInterestRate())-getServiceCharge();
         balance+=netChange;
         setCurrentBalance(balance);
+        setMaturity();
         return netChange;
     }
 
@@ -61,7 +62,7 @@ public class AccFixed extends Account{
                 setLoanApproval(0);
             }
             else {
-                setLoanRequest();
+                setLoanRequest(amount);
                 System.out.println("Loan request successful, sent for approval.");
             }
         }
@@ -72,5 +73,9 @@ public class AccFixed extends Account{
 
     public static void updateRate(double newRate) {
         interestRate=newRate;
+    }
+
+    public void setMaturity() {
+        if(getAccountAge()>0) this.maturity = true;
     }
 }
