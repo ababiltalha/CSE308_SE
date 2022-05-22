@@ -23,7 +23,7 @@ public class Main {
 //            } else if (command[0].equalsIgnoreCase("asdhkas"))
 //                System.out.println("portesi");
 //            else System.out.println("Invalid input. ");
-            if (command[0].equalsIgnoreCase("EXit")) {
+            if (command[0].equalsIgnoreCase("E")) {
                 break;
             }
         }
