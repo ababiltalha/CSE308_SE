@@ -31,6 +31,7 @@ public class Bank {
         }
         activeAcc= null;
         activeEmp= null;
+        System.out.println("Bank Created; MD, O1, O2, C1, C2, C3, C4, C5 created.");
     }
 
     public void incrementClock(){
@@ -41,6 +42,7 @@ public class Bank {
             internalFund-=a.updateBalance();
             a.incrementClock();
         }
+        System.out.println("One year passed.");
     }
     private boolean checkForName(String newName)
     {
@@ -59,6 +61,12 @@ public class Bank {
     }
 
     private void deactivate(){
+        if(checkAccLogIn()){
+            System.out.println("Transaction Closed for "+activeAcc.getName()+".");
+        }
+        if(checkEmpLogIn()){
+            System.out.println("Operation for "+activeEmp.getName()+" closed.");
+        }
         this.activeAcc=null;
         this.activeEmp=null;
     }
@@ -100,6 +108,7 @@ public class Bank {
     }
 
     public void openUser(String name){
+        boolean flag=false;
         if(name.equals("MD")) setActiveEmp(MD);
         else if(name.equals("O1")) setActiveEmp(O.get(0));
         else if(name.equals("O2")) setActiveEmp(O.get(1));
@@ -114,10 +123,21 @@ public class Bank {
                     accountList) {
                 if (a.getName().equals(name)) {
                     setActiveAcc(a);
+                    System.out.println("Welcome back, "+name+".");
                     return;
                 }
             }
         }
+        for (Account a:
+                accountList) {
+            if(a.isLoanRequest()){
+                flag=true;
+                break;
+            }
+        }
+        System.out.print(name+" active");
+        if(activeEmp.isApproveLoanPrivilege() && flag) System.out.print(", there are loan approvals pending");
+        System.out.println();
     }
 
     public void closeUser(){

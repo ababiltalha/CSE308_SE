@@ -85,8 +85,9 @@ public abstract class Account {
     }
 
     public void queryDeposit(){
-        System.out.println("Current Balance "+currentBalance+"$, ");
-        if(loanAmount!=0)   System.out.print("loan "+loanAmount+"$");
+        System.out.print("Current Balance "+currentBalance+"$");
+        if(loanAmount!=0)   System.out.print(", loan "+loanAmount+"$");
+        System.out.println();
     }
 
     public double getRequestedAmount() {

@@ -1,9 +1,9 @@
 public abstract class Employee {
     private String name;
-    final boolean lookUpPrivilege;
-    final boolean approveLoanPrivilege;
-    final boolean changeRatePrivilege;
-    final boolean seeFundPrivilege;
+    private final boolean lookUpPrivilege;
+    private final boolean approveLoanPrivilege;
+    private final boolean changeRatePrivilege;
+    private final boolean seeFundPrivilege;
 
     protected Employee(String name, boolean lookUpPrivilege, boolean approveLoanPrivilege,
                        boolean changeRatePrivilege, boolean seeFundPrivilege) {
@@ -14,12 +14,18 @@ public abstract class Employee {
         this.lookUpPrivilege = lookUpPrivilege;
     }
 
+
+    public boolean isApproveLoanPrivilege() {
+        return approveLoanPrivilege;
+    }
+
+
     public boolean lookUpAccount(Account account){
         if(!lookUpPrivilege){
             System.out.println("You don't have permission for this operation.");
             return false;
         }
-        System.out.println(account.getName()+"'s current balance"+account.getCurrentBalance()+"$");
+        System.out.println(account.getName()+"'s current balance "+account.getCurrentBalance()+"$");
         return true;
     }
 
@@ -48,5 +54,9 @@ public abstract class Employee {
         if(type.equalsIgnoreCase("student")) AccStudent.updateRate(newRate);
         if(type.equalsIgnoreCase("loan")) AccLoan.updateRate();
         if(type.equalsIgnoreCase("fixed")) AccFixed.updateRate(newRate);
+    }
+
+    public String getName() {
+        return name;
     }
 }
