@@ -2,7 +2,7 @@ package QueueManagementSystem;
 
 import java.util.ArrayList;
 
-public class QMSProduct {
+class QMSProduct {
     private ArrayList<Display> displays;
     private Processor processor;
     private CommModule commModule;
