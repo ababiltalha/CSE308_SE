@@ -24,9 +24,6 @@ public class Main {
         yearCount= sc.nextInt();
 
 
-
-
-
         Director director= new Director();
         IQMSBuilder deluxeBuilder= new DeluxeBuilder();
         IQMSBuilder optimalBuilder= new OptimalBuilder();

@@ -9,17 +9,18 @@ public class OptimalBuilder implements IQMSBuilder {
 
     @Override
     public void addDisplays(int displayCount) {
-        product.addDisplays(displayFactory.getDisplay("LED"), displayCount);
+        for (int i = 0; i < displayCount; i++)
+            product.addParts(displayFactory.getDisplay("LED"));
     }
 
     @Override
     public void addProcessor(int displayCount) {
-        product.addProcessor(processorFactory.getProcessor("OPTIMAL", displayCount));
+        product.addParts(processorFactory.getProcessor("OPTIMAL", displayCount));
     }
 
     @Override
     public void addCommModule(int commModuleChoice) {
-        product.addCommModule(commModuleFactory.getCommModule(commModuleChoice));
+        product.addParts(commModuleFactory.getCommModule(commModuleChoice));
     }
 
 

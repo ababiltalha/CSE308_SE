@@ -8,17 +8,18 @@ public class DeluxeBuilder implements IQMSBuilder {
 
     @Override
     public void addDisplays(int displayCount) {
-        product.addDisplays(displayFactory.getDisplay("LCD"), displayCount);
+        for (int i = 0; i < displayCount; i++)
+            product.addParts(displayFactory.getDisplay("LCD"));
     }
 
     @Override
     public void addProcessor(int displayCount) {
-        product.addProcessor(processorFactory.getProcessor("DELUXE", displayCount));
+        product.addParts(processorFactory.getProcessor("DELUXE", displayCount));
     }
 
     @Override
     public void addCommModule(int commModuleChoice) {
-        product.addCommModule(commModuleFactory.getCommModule(commModuleChoice));
+        product.addParts(commModuleFactory.getCommModule(commModuleChoice));
     }
 
 

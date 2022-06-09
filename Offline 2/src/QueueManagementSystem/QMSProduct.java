@@ -11,18 +11,8 @@ class QMSProduct {
         this.parts.add(new Application());
     }
 
-    public void addDisplays(Display d, int displayCount){
-        for (int i = 0; i < displayCount; i++) {
-            this.parts.add(d);
-        }
-    }
-
-    public void addProcessor(Processor p){
+    public void addParts(Part p){
         this.parts.add(p);
-    }
-
-    public void addCommModule(CommModule c){
-        this.parts.add(c);
     }
 
     public void show(int year){
