@@ -8,9 +8,10 @@ public class GradeCalculator {
             return "Non-number input detected";
         }
 
+        if(totalMark<0) return "Total mark entered negative";
         long roundedTotalMark= (long) Math.ceil(totalMark);
         if(credit==3){
-            if(roundedTotalMark<0 || roundedTotalMark>300){
+            if(roundedTotalMark>300){
                 return "Total mark out of range for given credit";
             }
             else {
@@ -21,7 +22,7 @@ public class GradeCalculator {
             }
         }
         else if(credit==4){
-            if(roundedTotalMark<0 || roundedTotalMark>400){
+            if(roundedTotalMark>400){
                 return "Total mark out of range for given credit";
             }
             else {
