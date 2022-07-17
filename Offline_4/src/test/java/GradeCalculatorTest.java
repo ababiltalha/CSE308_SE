@@ -67,14 +67,56 @@ class GradeCalculatorTest {
     }
 
     // invalid credit
+    @Test
+    void testInvalidCreditInput_1() {
+        assertEquals("Invalid credit input", gradeCalculator.calculateGrade("150.4","2.5"));
+    }
+
+    @Test
+    void testInvalidCreditInput_2() {
+        assertEquals("Invalid credit input", gradeCalculator.calculateGrade("0","0"));
+    }
+
+    @Test
+    void testInvalidCreditInput_3() {
+        assertEquals("Invalid credit input", gradeCalculator.calculateGrade("450.4","5"));
+    }
 
     // invalid marks (below lower bound)
+    @Test
+    void testLessThanZero_1() {
+        assertEquals("Total mark entered negative", gradeCalculator.calculateGrade("-0.01","3"));
+    }
+
+    @Test
+    void testLessThanZero_2() {
+        assertEquals("Total mark entered negative", gradeCalculator.calculateGrade("-0.4","4"));
+    }
 
     // invalid marks (above upper bound)
     // 3 credit
+    @Test
+    void testMoreThanFullMarksInThreeCredit_1() {
+        assertEquals("Total mark out of range for given credit", gradeCalculator.calculateGrade("300.01","3"));
+    }
+
+    @Test
+    void testMoreThanFullMarksInThreeCredit_2() {
+        assertEquals("Total mark out of range for given credit", gradeCalculator.calculateGrade("305","3"));
+    }
 
     // 4 credit
+    @Test
+    void testMoreThanFullMarksInFourCredit_1() {
+        assertEquals("Total mark out of range for given credit", gradeCalculator.calculateGrade("400.01","4"));
+    }
 
+    @Test
+    void testMoreThanFullMarksInFourCredit_2() {
+        assertEquals("Total mark out of range for given credit", gradeCalculator.calculateGrade("404","4"));
+    }
+
+    // general graded cases
     // 3 credit
     // A grade
     // close to upper bound cases
